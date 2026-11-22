@@ -1,0 +1,811 @@
+/* ============================================================
+   WESTSIDE LEONARDO'S — style.css
+   ============================================================
+   How CSS works, in one line:
+       selector { property: value; }
+   The selector picks WHAT to style, the properties say HOW.
+
+     .card       → anything with class="card"
+     #menu       → the one element with id="menu"
+     h2          → every <h2>
+     .card img   → any <img> INSIDE something with class="card"
+   ============================================================ */
+
+
+/* ---------- 1. COLOUR VARIABLES ----------
+   "Custom properties" let you name a colour once and reuse it.
+   Want a different green? Change it here and the whole site updates.
+   These colours were picked from the Westside logo. */
+:root {
+  --green: #2bd62b;        /* the bright logo green */
+  --green-dark: #138a13;
+  --cream: #f4f7b8;        /* the pale yellow behind the logo */
+  --black: #0c0c0c;
+  --charcoal: #1a1a1a;
+  --white: #ffffff;
+  --text-muted: #c9c9c9;
+
+  --radius: 16px;          /* how round the corners are */
+  --max-width: 1100px;     /* the widest the content gets on big screens */
+}
+
+
+/* ---------- 2. RESETS & BASICS ---------- */
+
+/* box-sizing: border-box makes width include padding and border.
+   Almost every pro site starts with this; it saves headaches. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;  /* menu links glide instead of jumping */
+  scroll-padding-top: 80px; /* stops the sticky header covering headings */
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito", system-ui, sans-serif; /* fallbacks if Google Fonts fails */
+  font-size: 1.05rem;   /* rem = relative to the browser's base size (usually 16px) */
+  line-height: 1.6;
+  color: var(--white);
+  background: var(--black);
+}
+
+/* Images never overflow their box, and scale on small screens */
+img,
+video,
+iframe {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--green);
+}
+
+h1, h2, h3 {
+  font-family: "Lilita One", "Arial Black", sans-serif;
+  font-weight: 400;     /* Lilita One is already bold */
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+.small {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+
+/* ---------- 3. HEADER ----------
+   position: sticky keeps the header on screen while you scroll. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;          /* z-index = stacking order; higher is on top */
+  display: flex;        /* flexbox puts children side by side */
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1.25rem;
+  background: rgba(12, 12, 12, 0.92);
+  border-bottom: 2px solid var(--green-dark);
+  backdrop-filter: blur(6px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--green);
+  text-decoration: none;
+  font-family: "Lilita One", sans-serif;
+  font-size: 1.3rem;
+  white-space: nowrap;
+}
+
+.site-header nav ul {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;     /* removes the bullet points */
+}
+
+.site-header nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.site-header nav a:hover {   /* :hover = while the mouse is over it */
+  color: var(--green);
+}
+
+
+/* ---------- 4. BUTTONS ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;  /* a huge radius = pill shape */
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.15s, background 0.15s; /* animate changes smoothly */
+}
+
+.btn:hover {
+  transform: translateY(-2px);  /* lifts slightly on hover */
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--black);
+}
+
+.btn-ghost {
+  border: 2px solid var(--green);
+  color: var(--green);
+}
+
+
+/* ---------- 5. HERO ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;  /* two columns: text, logo */
+  align-items: center;
+  gap: 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;                    /* "auto" left/right = centred */
+  padding: 3rem 1.25rem 2rem;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--cream);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.hero h1 {
+  margin: 0.25rem 0;
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  /* clamp(min, preferred, max): grows with the screen
+     (7vw = 7% of the window width) but never past the limits */
+  color: var(--green);
+  text-shadow: 0 0 18px rgba(43, 214, 43, 0.45); /* neon glow like the logo */
+}
+
+.hero h1 span {
+  display: block;   /* puts "Leonardo's" on its own line */
+}
+
+.tagline {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.hero-hours strong {
+  color: var(--cream);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;   /* buttons drop to a new line if there's no room */
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.hero-logo {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+
+/* ---------- 6. SECTIONS (shared layout) ---------- */
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  color: var(--green);
+  margin: 0 0 0.5rem;
+}
+
+.section-intro {
+  margin-top: 0;
+  color: var(--text-muted);
+}
+
+
+/* ---------- 7. MENU ---------- */
+.menu-category {
+  margin-top: 2.5rem;
+}
+
+.menu-category h3 {
+  font-size: 1.8rem;
+  margin: 0 0 0.25rem;
+  color: var(--cream);
+}
+
+.note {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* CSS GRID: the magic line that makes cards fit any screen.
+   "Make as many columns as fit, each at least 200px wide,
+    sharing the leftover space equally."
+   No media queries needed. It just works on iPhone and desktop. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  margin: 0;              /* <figure> has default margins; remove them */
+  background: var(--charcoal);
+  border-radius: var(--radius);
+  overflow: hidden;       /* clips the photo to the rounded corners */
+  border: 1px solid #2a2a2a;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--green);
+}
+
+/* ---------- Click-to-enlarge (script.js adds the "enlarged" class) ----------
+   cursor: zoom-in shows a magnifying-glass pointer so people know they can click. */
+.card {
+  cursor: zoom-in;
+  position: relative;   /* lets z-index work on this card */
+}
+
+.card.enlarged {
+  transform: scale(1.18);   /* 18% bigger */
+  z-index: 20;              /* sit on top of the cards next to it */
+  border-color: var(--green);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 0 3px var(--green);
+  cursor: zoom-out;
+}
+
+/* A visible outline when you reach a card with the Tab key */
+.card:focus-visible {
+  outline: 3px solid var(--cream);
+  outline-offset: 3px;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* every photo the same shape... */
+  object-fit: cover;     /* ...cropped to fill it, never squished */
+}
+
+/* The caption stacks name → description → price, top to bottom.
+   flex-direction: column turns a row of items into a column. */
+.card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.item {
+  font-weight: 800;
+}
+
+/* Short descriptions under an item name */
+.card small,
+.price-list small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.price {
+  color: var(--cream);
+  font-weight: 800;
+}
+
+/* "Ask for price": a bit dimmer and in italics so it reads as a note */
+.price.ask {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* ---------- Price list (items without a photo) ----------
+   Each <li> is a flexbox row. justify-content: space-between
+   pushes the name to the left edge and the price to the right. */
+.price-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  max-width: 720px;
+}
+
+.price-list li {
+  display: flex;
+  flex-wrap: wrap;      /* on narrow phones the price drops under the name */
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.15rem 1rem;    /* row gap, column gap: tight when the price wraps */
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed #3a3a3a;
+}
+
+.price-list .item {
+  flex: 1 1 auto;       /* the name takes the room it needs; if name + price don't fit, the price wraps */
+}
+
+.price-list .price {
+  margin-left: auto;    /* keeps the price on the right, even after it wraps */
+  text-align: right;
+}
+
+/* A "non-breaking space" (&nbsp; in the HTML) between "Full" and "$18.00"
+   keeps them glued together so a line never breaks between them. */
+
+/* ---------- Wing price table ---------- */
+.table-wrap {
+  overflow-x: auto;     /* if the table is too wide for a phone, swipe sideways */
+  margin-top: 1.25rem;
+}
+
+.price-table {
+  border-collapse: collapse;  /* merge the double borders between cells */
+  min-width: 420px;
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+}
+
+.price-table caption {
+  text-align: left;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.price-table th,
+.price-table td {
+  padding: 0.55rem 0.5rem;
+  border: 1px solid #333;
+}
+
+.price-table thead th {
+  background: var(--green-dark);
+  color: var(--white);
+}
+
+.price-table tbody th {
+  background: var(--charcoal);
+}
+
+.price-table td {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+/* :nth-child(even) = every 2nd row. "Zebra stripes" make rows easier to follow. */
+.price-table tbody tr:nth-child(even) td {
+  background: #151515;
+}
+
+.secret-hint {
+  margin-top: 2.5rem;
+  text-align: center;
+  color: var(--cream);
+  font-style: italic;
+}
+
+
+/* ---------- 8. SECRET MENU ---------- */
+.secret {
+  background: linear-gradient(160deg, #102a10, var(--black) 70%);
+  border: 2px dashed var(--green);
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* This class gets added by script.js to play the "reveal" animation */
+.secret.revealed {
+  animation: pop-in 0.6s ease-out;
+}
+
+/* @keyframes describes an animation step by step (0% → 100%) */
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(0.95) translateY(20px); }
+  100% { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+.colour-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.colour-items h3 {
+  margin: 0;
+  color: var(--cream);
+  font-size: 1.5rem;
+}
+
+.colour-items p {
+  margin: 0.25rem 0;
+}
+
+.chip {
+  display: inline-block;
+  white-space: nowrap;  /* keep "Sweet Chili Heat" on one line */
+  padding: 0.25rem 0.75rem;
+  margin: 0.2rem 0.15rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--white);
+}
+
+.chip.blue   { background: #1f6fd1; }
+.chip.red    { background: #d42a2a; }
+.chip.orange { background: #f07d12; }
+.chip.purple { background: #7b3fc4; }
+.chip.black  { background: #000; border: 1px solid #555; }
+
+
+/* ---------- 9. HOURS / CONTACT (two-column boxes) ---------- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.info-box {
+  background: var(--charcoal);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  border: 1px solid #2a2a2a;
+}
+
+.big-hours {
+  font-family: "Lilita One", sans-serif;
+  font-size: 2.4rem;
+  margin: 0;
+  color: var(--cream);
+}
+
+.adults ul {
+  padding-left: 1.2rem;
+}
+
+.age-badge {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  background: var(--cream);
+  color: var(--black);
+  padding: 0.15rem 0.6rem;
+  border-radius: 8px;
+}
+
+address {
+  font-style: normal;   /* browsers make <address> italic by default */
+}
+
+address p {
+  margin: 0 0 0.75rem;
+}
+
+.map-box iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+
+/* ---------- 10. GALLERY ---------- */
+.video-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.video-card {
+  margin: 0;
+}
+
+.video-card video {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--charcoal);
+}
+
+.video-card figcaption {
+  margin-top: 0.4rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+
+/* ---------- 11. FAMILY ---------- */
+.family {
+  background: var(--cream);
+  color: var(--black);
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.family .section-title {
+  color: var(--green-dark);
+}
+
+.family-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.family-photos {
+  display: grid;
+  gap: 1rem;
+}
+
+.family-photos img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Tilt the photos slightly so they look like snapshots */
+.family-photos img:first-child { transform: rotate(-1.5deg); }
+.family-photos img:last-child  { transform: rotate(1.5deg); max-height: 420px; object-fit: cover; }
+
+.family-message {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.family-message p {
+  margin: 0 0 1rem;
+}
+
+.family-message footer {
+  font-family: "Lilita One", sans-serif;
+  font-size: 1.6rem;
+  color: var(--green-dark);
+}
+
+
+/* ---------- 12. FOOTER ---------- */
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem 7rem;  /* extra bottom space so the chef doesn't cover it */
+  border-top: 2px solid var(--green-dark);
+  color: var(--text-muted);
+}
+
+.site-footer p {
+  margin: 0.25rem 0;
+}
+
+
+/* ---------- 13. THE ANIMATED CHEF ----------
+   position: fixed pins it to the screen corner, even when scrolling. */
+.chef-button {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.chef-button img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 4px solid var(--green);
+  box-shadow: 0 0 18px rgba(43, 214, 43, 0.6);
+  /* Two animations at once: bob up/down forever, and a wave every few seconds */
+  animation: bob 2.4s ease-in-out infinite, wiggle 5s ease-in-out infinite;
+}
+
+.chef-button:hover img,
+.chef-button:focus-visible img {
+  animation-play-state: paused;
+  transform: scale(1.12) rotate(-6deg);
+  transition: transform 0.2s;
+}
+
+/* The little speech bubble */
+.chef-bubble {
+  background: var(--cream);
+  color: var(--black);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 14px 14px 2px 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  animation: bubble 5s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -8px; }
+}
+
+/* Mostly still, then a quick shake near the end of every cycle */
+@keyframes wiggle {
+  0%, 80%, 100% { rotate: 0deg; }
+  84%           { rotate: -10deg; }
+  88%           { rotate: 10deg; }
+  92%           { rotate: -6deg; }
+  96%           { rotate: 6deg; }
+}
+
+/* The bubble fades in and out so it isn't annoying */
+@keyframes bubble {
+  0%, 15%   { opacity: 0; transform: translateX(8px); }
+  25%, 85%  { opacity: 1; transform: translateX(0); }
+  95%, 100% { opacity: 0; transform: translateX(8px); }
+}
+
+/* After the secret menu is open, the bubble changes (see script.js) */
+.chef-button.opened .chef-bubble {
+  animation: none;
+  opacity: 1;
+}
+
+
+/* ---------- 14. MOBILE (screens 760px wide or less) ----------
+   A "media query" applies these rules ONLY when the condition is true.
+   Your iPhone is about 390px wide, so everything below kicks in there. */
+@media (max-width: 760px) {
+
+  /* Header: brand on top, nav scrolls sideways underneath */
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .site-header nav {
+    width: 100%;
+    overflow-x: auto;     /* swipe left/right if the links don't fit */
+  }
+
+  .site-header nav ul {
+    gap: 1rem;
+    white-space: nowrap;
+  }
+
+  html {
+    scroll-padding-top: 110px;
+  }
+
+  /* Stack the two-column layouts into one column */
+  .hero,
+  .two-col,
+  .family-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 1.5rem;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-logo {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  /* Two cards per row on phones instead of one big one */
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .card figcaption {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.6rem;
+  }
+
+  /* On phones the cards are already half the screen wide, so grow a bit less */
+  .card.enlarged {
+    transform: scale(1.12);
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Smaller table on phones so all 5 columns fit */
+  .price-table {
+    min-width: 0;
+    font-size: 0.9rem;
+  }
+
+  .price-table th,
+  .price-table td {
+    padding: 0.45rem 0.25rem;
+  }
+
+  .secret,
+  .family {
+    border-radius: 0;
+  }
+
+  /* No tilt on phones: the rotated corners poke past the screen edge */
+  .family-photos img:first-child,
+  .family-photos img:last-child {
+    transform: none;
+  }
+
+  .chef-button img {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+
+/* ---------- 15. ACCESSIBILITY: REDUCED MOTION ----------
+   Some people turn on "Reduce Motion" (iPhone: Settings → Accessibility
+   → Motion) because animations make them dizzy. Respect that. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
