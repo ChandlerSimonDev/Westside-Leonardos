@@ -809,3 +809,19 @@ address p {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* ---------- 16. DRINKS SUB-HEADING ----------
+   Added later. It's fine (and normal) to add new rules at the end of a
+   CSS file. Just remember: if two rules conflict, the LATER one wins. */
+.drinks-subhead {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: var(--cream);
+  margin: 1.75rem 0 0;
+}
+
+.drinks-subhead .age-badge {
+  font-size: 0.85rem;
+}

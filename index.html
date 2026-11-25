@@ -155,14 +155,11 @@
               <span class="price">$6.00</span>
             </figcaption>
           </figure>
-          <figure class="card">
-            <img src="images/chicken-burger.jpg" alt="Crispy chicken burger with shredded lettuce" loading="lazy">
-            <figcaption>
-              <span class="item">Chicken Burger</span>
-              <span class="price">$6.00</span>
-            </figcaption>
-          </figure>
         </div>
+
+        <ul class="price-list">
+          <li><span class="item">Chicken Burger</span><span class="price">$6.00</span></li>
+        </ul>
 
         <!-- A price list row: item on the left, price on the right.
              CSS (flexbox) pushes them to opposite sides. -->
@@ -202,35 +199,14 @@
               <span class="price">S&nbsp;$10.00 · M&nbsp;$15.00 · L&nbsp;$20.00</span>
             </figcaption>
           </figure>
-          <figure class="card">
-            <img src="images/bacon-poutine.jpg" alt="Bacon poutine loaded with crispy bacon" loading="lazy">
-            <figcaption>
-              <span class="item">Bacon Poutine</span>
-              <span class="price">S&nbsp;$9.00 · M&nbsp;$14.00 · L&nbsp;$20.00</span>
-            </figcaption>
-          </figure>
-          <figure class="card">
-            <img src="images/popcorn-chicken-poutine.jpg" alt="Popcorn chicken poutine with gravy" loading="lazy">
-            <figcaption>
-              <span class="item">Popcorn Chicken Poutine</span>
-              <span class="price">S&nbsp;$10.00 · M&nbsp;$15.00 · L&nbsp;$24.00</span>
-            </figcaption>
-          </figure>
-          <figure class="card">
-            <img src="images/chicken-strip-poutine.jpg" alt="Chicken strip poutine with gravy" loading="lazy">
-            <figcaption>
-              <span class="item">Chicken Strip Poutine</span>
-              <span class="price">S&nbsp;$9.00 · M&nbsp;$15.00 · L&nbsp;$21.00</span>
-            </figcaption>
-          </figure>
-          <figure class="card">
-            <img src="images/steak-poutine.jpg" alt="Steak poutine piled with shaved steak and gravy" loading="lazy">
-            <figcaption>
-              <span class="item">Steak Poutine</span>
-              <span class="price">S&nbsp;$15.00 · M&nbsp;$18.00 · L&nbsp;$29.00</span>
-            </figcaption>
-          </figure>
         </div>
+
+        <ul class="price-list">
+          <li><span class="item">Bacon Poutine</span><span class="price">S&nbsp;$9.00 · M&nbsp;$14.00 · L&nbsp;$20.00</span></li>
+          <li><span class="item">Popcorn Chicken Poutine</span><span class="price">S&nbsp;$10.00 · M&nbsp;$15.00 · L&nbsp;$24.00</span></li>
+          <li><span class="item">Chicken Strip Poutine</span><span class="price">S&nbsp;$9.00 · M&nbsp;$15.00 · L&nbsp;$21.00</span></li>
+          <li><span class="item">Steak Poutine</span><span class="price">S&nbsp;$15.00 · M&nbsp;$18.00 · L&nbsp;$29.00</span></li>
+        </ul>
 
       </article>
 
@@ -360,6 +336,43 @@
           <li><span class="item">Fries &amp; Gravy</span><span class="price">S&nbsp;$6.00 · M&nbsp;$9.00 · L&nbsp;$12.00</span></li>
           <li><span class="item">Onion Rings</span><span class="price">S&nbsp;$4.00 · M&nbsp;$7.50 · L&nbsp;$10.00</span></li>
         </ul>
+      </article>
+
+      <!-- ---------- DRINKS ----------
+           No photos here, so it's all price lists. The <small> under
+           each item lists the choices. Beer and coolers get their own
+           list with the 19+ badge (the same .age-badge class used in
+           the "Also on Site" box, reused). -->
+      <article id="drinks" class="menu-category">
+        <h3>🥤 Drinks</h3>
+
+        <ul class="price-list">
+          <li>
+            <span class="item">Can of Pop<small>Pepsi, Diet Pepsi, Pepsi Zero, Ginger Ale, 7UP, 7UP Zero Sugar, Dr Pepper, Dr Pepper Zero Sugar</small></span>
+            <span class="price">$1.50 each</span>
+          </li>
+          <li>
+            <span class="item">2L Pop<small>Pepsi, Diet Pepsi, 7UP</small></span>
+            <span class="price">$4.50 each</span>
+          </li>
+          <li>
+            <span class="item">Can of Juice<small>Apple or Orange</small></span>
+            <span class="price">$2.00 each</span>
+          </li>
+        </ul>
+
+        <h4 class="drinks-subhead">Beer &amp; Coolers <span class="age-badge">19+</span></h4>
+        <ul class="price-list">
+          <li>
+            <span class="item">Beer<small>Budweiser, Bud Light, Michelob</small></span>
+            <span class="price">$2.50 each</span>
+          </li>
+          <li>
+            <span class="item">Coolers<small>Twisted Tea, Smirnoff Ice Encore, Coors Seltzer, Coors Slushie</small></span>
+            <span class="price">$5.00 each</span>
+          </li>
+        </ul>
+        <p class="note">Must be 19 or older. Valid ID may be required.</p>
       </article>
 
       <!-- A hint so people know there's more to find. -->
@@ -493,7 +506,7 @@
       <div class="info-box adults">
         <h2 class="section-title">Also on Site <span class="age-badge">19+</span></h2>
         <ul>
-          <li><strong>Alcoholic beverages</strong></li>
+          <li><strong>Alcoholic beverages</strong> (beer &amp; coolers, see <a href="#drinks">Drinks</a>)</li>
           <li><strong>VLTs</strong> (video lottery terminals)</li>
         </ul>
         <p class="small">You must be 19 or older to buy alcohol or play VLTs. Valid ID may be required. Please play responsibly.</p>
